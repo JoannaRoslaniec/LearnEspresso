@@ -1,10 +1,14 @@
 
-Android AutofillFramework Sample
-===================================
+Android AutofillFramework Sample (Kotlin)
+=========================================
 
 This sample demonstrates the use of the Autofill Framework. It includes implementations of client
 Activities with views that should be autofilled, and a Service that can provide autofill data to
 client Activities.
+
+Maintainer's Note
+------------------
+**IMPORTANT:** The Kotlin version of this sample is temporarily out of date. Until this is corrected, you should reference the Java version instead.
 
 Introduction
 ------------
@@ -48,17 +52,17 @@ child views. Supporting autofill on these child views is a little more involved.
 The following code snippet shows how to signal to the autofill service that a specific
 autofillable virtual view has come into focus:
 
-```java
-class CustomVirtualView {
+```kotlin
+class CustomVirtualView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 ...
     // Cache AutofillManager system service
-    mAutofillManager = context.getSystemService(AutofillManager.class);
+    private val autofillManager: AutofillManager = context.getSystemService(AutofillManager::class.java)
 ...
     // Notify service which virtual view has come into focus.
-    mAutofillManager.notifyViewEntered(CustomVirtualView.this, id, absBounds);
+    autofillManager.notifyViewEntered(this@CustomVirtualView, id, absBounds)
 ...
-   // Notify service that a virtual view has left focus.
-   mAutofillManager.notifyViewExited(CustomVirtualView.this, id);
+    // Notify service that a virtual view has left focus.
+    autofillManager.notifyViewExited(this@CustomVirtualView, id)
 }
 ```
 
@@ -68,29 +72,30 @@ views part of the UI toolkit, but you need to implement this yourself if you hav
 virtual child views. The following code example shows the `View` method you have to override in
 order to provide this view hierarchy data to the Autofill service.
 
-```java
-@Override
-public void onProvideAutofillVirtualStructure(ViewStructure structure, int flags) {
-    // Build a ViewStructure that will get passed to the AutofillService by the framework
-    // when it is time to find autofill suggestions.
-    structure.setClassName(getClass().getName());
-    int childrenSize = mItems.size();
-    int index = structure.addChildCount(childrenSize);
+```kotlin
+override fun onProvideAutofillVirtualStructure(structure: ViewStructure, flags: Int) {
+    // Build a ViewStructure to pack in AutoFillService requests.
+    structure.setClassName(javaClass.name)
+    val childrenSize = items.size()
+    Log.d(TAG, "onProvideAutofillVirtualStructure(): flags = " + flags + ", items = "
+            + childrenSize + ", extras: " + bundleToString(structure.extras))
+    var index = structure.addChildCount(childrenSize)
     // Traverse through the view hierarchy, including virtual child views. For each view, we
     // need to set the relevant autofill metadata and add it to the ViewStructure.
-    for (int i = 0; i < childrenSize; i++) {
-        Item item = mItems.valueAt(i);
-        ViewStructure child = structure.newChild(index);
-        child.setAutofillId(structure, item.id);
-        child.setAutofillHints(item.hints);
-        child.setAutofillType(item.type);
-        child.setDataIsSensitive(!item.sanitized);
-        child.setText(item.text);
-        child.setAutofillValue(AutofillValue.forText(item.text));
-        child.setFocused(item.focused);
-        child.setId(item.id, getContext().getPackageName(), null, item.line.idEntry);
-        child.setClassName(item.getClassName());
-        index++;
+    for (i in 0..childrenSize - 1) {
+        val item = items.valueAt(i)
+        Log.d(TAG, "Adding new child at index $index: $item")
+        val child = structure.newChild(index)
+        child.setAutofillId(structure, item.id)
+        child.setAutofillHints(item.hints)
+        child.setAutofillType(item.type)
+        child.setDataIsSensitive(!item.sanitized)
+        child.text = item.text
+        child.setAutofillValue(AutofillValue.forText(item.text))
+        child.setFocused(item.focused)
+        child.setId(item.id, context.packageName, null, item.line.idEntry)
+        child.setClassName(item.className)
+        index++
     }
 }
 ```
@@ -103,36 +108,36 @@ values for username, password, birthday, and address. This method would then be 
 four of those fields. The following code example shows how the sample app implements the method
 to deliver a UI update to the appropriate child view after the user makes their selection.
 
-```java
-@Override
-public void autofill(SparseArray<AutofillValue> values) {
+```kotlin
+override fun autofill(values: SparseArray<AutofillValue>) {
     // User has just selected a Dataset from the list of autofill suggestions.
     // The Dataset is comprised of a list of AutofillValues, with each AutofillValue meant
     // to fill a specific autofillable view. Now we have to update the UI based on the
     // AutofillValues in the list.
-    for (int i = 0; i < values.size(); i++) {
-        final int id = values.keyAt(i);
-        final AutofillValue value = values.valueAt(i);
-        final Item item = mItems.get(id);
-        if (item != null && item.editable) {
-            // Set the item's text to the text wrapped in the AutofillValue.
-            item.text = value.getTextValue();
-        } else if (item == null) {
-            // Component not found, so no-op.
-        } else {
-            // Component not editable, so no-op.
+    for (i in 0..values.size() - 1) {
+        val id = values.keyAt(i)
+        val value = values.valueAt(i)
+        items[id]?.let { item ->
+            if (item.editable) {
+                // Set the item's text to the text wrapped in the AutofillValue.
+                item.text = value.textValue
+            } else {
+                // Component not editable, so no-op.
+            }
         }
     }
-    postInvalidate();
+    postInvalidate()
 }
 ```
 
 Pre-requisites
 --------------
 
-- Android SDK 26
-- Android Build Tools v27.0.2
-- Android Support Repository
+- Android SDK Preview O
+- Android Studio 3.0+
+- Android Build Tools v26+
+- Android Support Repository v26+
+- Gradle v3.0+
 
 Screenshots
 -------------
