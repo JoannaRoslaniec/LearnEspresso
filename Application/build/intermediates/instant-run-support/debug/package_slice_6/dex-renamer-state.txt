@@ -1,0 +1,4 @@
+#Mon Mar 26 20:54:19 CEST 2018
+base.0=D\:\\Users\\Patronage\\GIT\\LearnEspresso\\Application\\build\\intermediates\\transforms\\dexMerger\\debug\\9
+path.0=classes.dex
+renamed.0=classes.dex
