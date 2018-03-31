@@ -4,7 +4,7 @@
             "outputFile": "D:\\Users\\Patronage\\GIT\\LearnEspresso\\Application\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\047d461960fa74c65ba3d247ed0401dc\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9efd2aaf8f63818b4d52c3236fddb61f\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-26.1.0.aar\\9853cdd6341e7bba31f9a157ca58c576\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-26.1.0.aar\\76bef2589f2cad4a0628fae5b7c1fb34\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

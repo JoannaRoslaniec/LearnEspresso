@@ -4,7 +4,7 @@
             "outputFile": "D:\\Users\\Patronage\\GIT\\LearnEspresso\\Application\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v26\\values-v26.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\047d461960fa74c65ba3d247ed0401dc\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\9efd2aaf8f63818b4d52c3236fddb61f\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\b68edc2dd80a69085c2e1392d369e0f2\\res\\values-v26\\values-v26.xml",
+                    "source": "C:\\Users\\Patronage\\.gradle\\caches\\transforms-1\\files-1.1\\design-26.1.0.aar\\29d9b7b60a090c1d7283fdb913de1093\\res\\values-v26\\values-v26.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",
